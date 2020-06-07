@@ -11,7 +11,7 @@ import { InlineSVGModule } from 'ng-inline-svg';
 @NgModule({
   imports: [
     CommonModule,
-    InlineSVGModule,
+    InlineSVGModule.forRoot({ baseUrl: '/assets/svg/' }),
     RouterModule.forChild(HomeRoutes)
   ],
   declarations: [
