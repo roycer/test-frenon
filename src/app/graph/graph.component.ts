@@ -7,20 +7,17 @@ declare var Chart: any;
   selector: 'app-graph',
   templateUrl: './graph.component.html'
 })
-export class GraphComponent implements OnInit, OnChanges {
+export class GraphComponent implements OnChanges, OnInit {
 
   @Input() add_id:number;
 
   public my_data = [0, 0, 0, 0, 0];
-
+  public my_chart = null;
   constructor() { }
 
-  ngOnChanges(){
-    console.log(this.add_id);
+  ngOnInit(){
+
     let these = this;
-    if(this.add_id>-1){
-      this.my_data[this.add_id]++;
-    }
 
     $(function () {
       var barCtx = $("#chart-bar")[0].getContext('2d');
@@ -49,21 +46,33 @@ export class GraphComponent implements OnInit, OnChanges {
         }
       ]
     };
-      new Chart(barCtx, {
-        type: "bar",
-        data: dataBar,
-        options: {
-          scales: {
-            xAxes: [{
-              stacked: true
-            }],
-            yAxes: [{
-              stacked: true
-            }]
+
+    these.my_chart = new Chart(barCtx, {
+          type: "bar",
+          data: dataBar,
+          options: {
+            scales: {
+              xAxes: [{
+                stacked: true
+              }],
+              yAxes: [{
+                stacked: true
+              }]
+            }
           }
-        }
+        });
       });
-    });
+  }
+
+  ngOnChanges(){
+
+    if(this.add_id>-1){
+      this.my_data[this.add_id]++;
+    }
+    if(this.my_chart){
+       this.my_chart.update();
+    }
+   
   }
 }
 

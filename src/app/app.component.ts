@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 export class AppComponent {
   
   public flag : boolean = true;
-  public api_id_vote = -1
+  public api_id_vote:number = -1
   constructor() {
 
   }

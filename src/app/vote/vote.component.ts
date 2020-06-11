@@ -6,13 +6,11 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class VoteComponent implements OnInit {
 
-    @Output() id_vote:number = new EventEmitter();
+    @Output() id_vote = new EventEmitter();
 
     constructor() {}
 
-    ngOnInit() {
-
-    }
+    ngOnInit() {}
 
     onClick(id:number){
       this.id_vote.emit(id);
