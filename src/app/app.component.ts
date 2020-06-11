@@ -1,16 +1,22 @@
 import { Component } from '@angular/core';
-import { NgProgress } from 'ngx-progressbar';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  templateUrl: './app.component.html'
 })
 export class AppComponent {
-  title = 'myFrontend';
-
-  constructor(public progress: NgProgress) {
+  
+  public flag : boolean = true;
+  public api_id_vote = -1
+  constructor() {
 
   }
+
+  onClick(tabs:boolean){
+    this.flag = tabs;
+  }
   
+  onVote(e_:number){
+    this.api_id_vote = e_;
+  }
 }

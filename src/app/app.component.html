@@ -1,3 +1,33 @@
-<div class="cat__content" [ngClass] = "{'disabledwindow': progress.isStarted == true }" >
-  <router-outlet></router-outlet>
+
+<section class="card">
+  <div class="card-header">
+      <span class="cat__core__title">
+          <strong>El mejor juego</strong>
+      </span>
+      <br />
+      <br />
+      <ul class="nav nav-tabs card-header-tabs">
+          <li class="nav-item">
+              <a class="nav-link" href="javascript: void(0);" (click)="onClick(true)">Grafico</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="javascript: void(0);" (click)="onClick(false)">Voto</a>
+          </li>
+          
+      </ul>
+  </div>
+  
+  <div class="card-block" [hidden]="!flag">
+    <app-graph [add_id]="api_id_vote"></app-graph>
+  </div>
+  <div class="card-block" [hidden]="flag">
+    <app-vote (id_vote)="onVote($event)"></app-vote>  
+  </div>
+
+</section>
+
+<div class="cat__content">
+  
+  
+  
 </div>
