@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "frenon-9d49e": {
+      "hosting": {
+        "myFrontend": [
+          "frenon-9d49e"
+        ]
+      }
+    }
+  }
+}

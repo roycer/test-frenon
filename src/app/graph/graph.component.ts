@@ -9,10 +9,10 @@ declare var Chart: any;
 })
 export class GraphComponent implements OnChanges, OnInit {
 
-  @Input() add_id:number;
+  @Input() valor:[];
 
-  public my_data = [0, 0, 0, 0, 0];
   public my_chart = null;
+  
   constructor() { }
 
   ngOnInit(){
@@ -22,9 +22,53 @@ export class GraphComponent implements OnChanges, OnInit {
     $(function () {
       var barCtx = $("#chart-bar")[0].getContext('2d');
 
-    var dataBar = {
-      labels: ["Cyberpunk 2077", "Death Stranding", "GTA 5", "Smash Bros Ultimate", "Call of Duty"],
-      datasets: [
+      var dataBar = {
+        labels: ["Cyberpunk 2077", "Death Stranding", "GTA 5", "Smash Bros Ultimate", "Call of Duty"],
+        datasets: [
+          {
+            label: "Leyenda",
+            backgroundColor: [
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(54, 162, 235, 0.2)',
+              'rgba(255, 206, 86, 0.2)',
+              'rgba(75, 192, 192, 0.2)',
+              'rgba(153, 102, 255, 0.2)',
+            ],
+            borderColor: [
+              'rgba(255,99,132,1)',
+              'rgba(54, 162, 235, 1)',
+              'rgba(255, 206, 86, 1)',
+              'rgba(75, 192, 192, 1)',
+              'rgba(153, 102, 255, 1)'
+            ],
+            borderWidth: 1,
+            data: these.valor
+          }
+        ]
+      };
+
+      these.my_chart = new Chart(barCtx, {
+            type: "bar",
+            data: dataBar,
+            options: {
+              scales: {
+                xAxes: [{
+                  stacked: true
+                }],
+                yAxes: [{
+                  stacked: true
+                }]
+              }
+            }
+          });
+        });
+  }
+
+  ngOnChanges(){
+    
+    if(this.my_chart){
+
+      this.my_chart.data.datasets = [
         {
           label: "Leyenda",
           backgroundColor: [
@@ -42,35 +86,11 @@ export class GraphComponent implements OnChanges, OnInit {
             'rgba(153, 102, 255, 1)'
           ],
           borderWidth: 1,
-          data: these.my_data
+          data: this.valor
         }
       ]
-    };
-
-    these.my_chart = new Chart(barCtx, {
-          type: "bar",
-          data: dataBar,
-          options: {
-            scales: {
-              xAxes: [{
-                stacked: true
-              }],
-              yAxes: [{
-                stacked: true
-              }]
-            }
-          }
-        });
-      });
-  }
-
-  ngOnChanges(){
-
-    if(this.add_id>-1){
-      this.my_data[this.add_id]++;
-    }
-    if(this.my_chart){
-       this.my_chart.update();
+    
+      this.my_chart.update();
     }
    
   }

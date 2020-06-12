@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnChanges } from '@angular/core';
+import { AppService } from './app.service';
 
 @Component({
   selector: 'app-root',
@@ -7,9 +8,16 @@ import { Component } from '@angular/core';
 export class AppComponent {
   
   public flag : boolean = true;
-  public api_id_vote:number = -1
-  constructor() {
+  public items: any;
+  public api_valor = [];
+  constructor(private appService:AppService) {
 
+    this.appService.getItems().subscribe((items:any)=>{
+      this.items = items;
+      this.api_valor = this.items[0]['valor'];
+    });
+
+    
   }
 
   onClick(tabs:boolean){
@@ -17,6 +25,12 @@ export class AppComponent {
   }
   
   onVote(e_:number){
-    this.api_id_vote = e_;
+
+    if(e_>-1){
+      this.api_valor[e_]++;
+    }
+    
+    this.appService.setItems({name:'g', valor:this.api_valor});
   }
+
 }

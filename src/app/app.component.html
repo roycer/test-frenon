@@ -18,16 +18,10 @@
   </div>
   
   <div class="card-block" [hidden]="!flag">
-    <app-graph [add_id]="api_id_vote"></app-graph>
+    <app-graph [valor]="api_valor"></app-graph>
   </div>
   <div class="card-block" [hidden]="flag">
     <app-vote (id_vote)="onVote($event)"></app-vote>  
   </div>
 
 </section>
-
-<div class="cat__content">
-  
-  
-  
-</div>
